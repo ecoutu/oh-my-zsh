@@ -1,14 +1,12 @@
 # Eric Coutu's theme, based off pygmalion
 
 prompt_setup_pygmalion(){
-  ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[red]%}|%{$reset_color%}%{$fg[green]%}"
-  ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-  ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}Δ%{$reset_color%}"
+  ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}:%{$fg[magenta]%}("
+  ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[magenta]%})%{$reset_color%} "
+  ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}%{$fg[red]%}Δ%{$reset_color%}"
   ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-  # base_prompt='%{$fg[green]%}%n@%m%{$reset_color%}%{$fg[red]%}:%{$reset_color%}%{$fg[cyan]%}%0~%{$reset_color%}%{$fg[red]%}|%{$reset_color%}'
   base_prompt='%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[cyan]%}${PWD/#$HOME/~}'
-  # post_prompt='%{$fg[cyan]%}⇒%{$reset_color%}  '
   post_prompt='%{$fg[cyan]%}$%{$reset_color%} '
 
   base_prompt_nocolor=$(echo "$base_prompt" | perl -pe "s/%\{[^}]+\}//g")
