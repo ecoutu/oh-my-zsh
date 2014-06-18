@@ -36,7 +36,7 @@ prompt_pygmalion_precmd(){
     virtual_env_prompt="($(basename "$VIRTUAL_ENV"))"
   fi
 
-  PROMPT="$virtual_env_prompt$swiq_env_prompt$base_prompt$gitinfo$nl$post_prompt"
+  PROMPT="$(virtualenv_prompt_info)$swiq_env_prompt$base_prompt$gitinfo$nl$post_prompt"
 }
 
 prompt_setup_pygmalion
