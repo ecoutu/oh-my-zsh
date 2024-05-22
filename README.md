@@ -92,15 +92,15 @@ _Robby's theme is the default one. It's not the fanciest one. It's not the simpl
 Once you find a theme that you'd like to use, you will need to edit the `~/.zshrc` file. You'll see an environment variable (all caps) in there that looks like:
 
 ```shell
-ZSH_THEME="robbyrussell"
+ZSH_THEME="random"
 ```
 
 To use a different theme, simply change the value to match the name of your desired theme. For example:
 
-```shell
+<!-- ```shell
 ZSH_THEME="agnoster" # (this is one of the fancy ones)
 # see https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#agnoster
-```
+``` -->
 
 _Note: many themes require installing the [Powerline Fonts](https://github.com/powerline/fonts) in order to render properly._
 
