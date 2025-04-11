@@ -17,7 +17,7 @@ fi
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="random"
+ZSH_THEME="afowler"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -26,11 +26,11 @@ ZSH_THEME="random"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+ CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="false"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -51,10 +51,10 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="false"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -72,7 +72,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-export FZF_BASE="${HOME}/.asdf/installs/fzf/0.51.0"
+export FZF_BASE="${HOME}/.asdf/installs/fzf/0.52.1"
 
 cdpath=(
   ${cdpath[@]}
@@ -86,78 +86,76 @@ cdpath=(
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  adb
-  asdf
-  autojump
-  aws
-  colored-man-pages
-  colorize
-  command-not-found
-  common-aliases
-  copybuffer
-  copydir
-  copyfile
-  cp
-  dircycle
-  direnv
-  dirhistory
-  dirpersist
-  docker
-  docker-compose
-  doctl
-  dotenv
-  dotnet
-  emoji
-  emoji-clock
-  emotty
-  encode64
-  fd
-  fzf
-  gcloud
-  gem
-  git
-  git-escape-magic
-  git-lfs
-  git-prompt
-  gitignore
-  globalias
-  golang
-  history
-  history-substring-search
-  jsontools
-  jump
-  nmap
-  node
-  npm
-  otp
-  pass
-  per-directory-history
-  percol
-  pip
-  pipenv
-  pj
-  profiles
-  python
-  repo
-  rsync
-  ruby
-  sudo
-  systemadmin
-  systemd
-  timer
-  tmux
-  tmux-cssh
-  ubuntu
-  virtualenv
-  vscode
-  wakeonlan
-  wd
-  web-search
-  urltools
-  z
-  zsh_reload
-  zsh-interactive-cd
-  zsh-navigation-tools
+  # adb
+  # # asdf
+  # autojump
+  # aws
+  # colored-man-pages
+  # colorize
+  # command-not-found
+  # common-aliases
+  # copybuffer
+  # copydir
+  # copyfile
+  # cp
+  # dircycle
+  # direnv
+  # # dirhistory
+  # dirpersist
+  # docker
+  # docker-compose
+  # doctl
+  # dotenv
+  # dotnet
+  # emoji
+  # emoji-clock
+  # emotty
+  # encode64
+  # fd
+  # # fzf
+  # gcloud
+  # gem
+  # git
+  # git-escape-magic
+  # git-lfs
+  # git-prompt
+  # gitignore
+  # # globalias
+  # golang
+  # # history
+  # # history-substring-search
+  # jsontools
+  # jump
+  # nmap
+  # node
+  # npm
+  # otp
+  # pass
+  # percol
+  # pip
+  # pipenv
+  # pj
+  # profiles
+  # python
+  # rsync
+  # ruby
+  # sudo
+  # systemadmin
+  # systemd
+  # timer
+  # tmux
+  # tmux-cssh
+  # ubuntu
+  # virtualenv
+  # vscode
+  # wakeonlan
+  # wd
+  # web-search
+  # urltools
+  # # z
+  # zsh_reload
+  # zsh-interactive-cd
+  # zsh-navigation-tools
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -192,26 +190,26 @@ path=(
 PROJECT_PATHS=(~/ecoutu/src)
 
 if [[ -d "${HOME}/.zsh" ]]; then
-  for file in $HOME/.zsh/*; do
+  for file in ${HOME}/.zsh/*; do
     if [[ ! -d "${file}" ]]; then
       source "${file}"
     fi
   done
 fi
 
-autoload -U +X bashcompinit && bashcompinit
+# autoload -U +X bashcompinit && bashcompinit
 
-### ZNT's installer added snippet ###
-fpath=("$fpath[@]" "$HOME/.config/znt/zsh-navigation-tools")
-autoload n-aliases n-cd n-env n-functions n-history n-kill n-list n-list-draw n-list-input n-options n-panelize n-help
-autoload znt-usetty-wrapper znt-history-widget znt-cd-widget znt-kill-widget
-alias naliases=n-aliases ncd=n-cd nenv=n-env nfunctions=n-functions nhistory=n-history
-alias nkill=n-kill noptions=n-options npanelize=n-panelize nhelp=n-help
-zle -N znt-history-widget
-bindkey '^R' znt-history-widget
-setopt AUTO_PUSHD HIST_IGNORE_DUPS PUSHD_IGNORE_DUPS
-zstyle ':completion::complete:n-kill::bits' matcher 'r:|=** l:|=*'
-### END ###
+# ### ZNT's installer added snippet ###
+# fpath=("$fpath[@]" "$HOME/.config/znt/zsh-navigation-tools")
+# autoload n-aliases n-cd n-env n-functions n-history n-kill n-list n-list-draw n-list-input n-options n-panelize n-help
+# autoload znt-usetty-wrapper znt-history-widget znt-cd-widget znt-kill-widget
+# alias naliases=n-aliases ncd=n-cd nenv=n-env nfunctions=n-functions nhistory=n-history
+# alias nkill=n-kill noptions=n-options npanelize=n-panelize nhelp=n-help
+# zle -N znt-history-widget
+# bindkey '^R' znt-history-widget
+# setopt AUTO_PUSHD HIST_IGNORE_DUPS PUSHD_IGNORE_DUPS
+# zstyle ':completion::complete:n-kill::bits' matcher 'r:|=** l:|=*'
+# ### END ###
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
