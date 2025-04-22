@@ -87,7 +87,7 @@ cdpath=(
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   # adb
-  # # asdf
+  asdf
   # autojump
   # aws
   # colored-man-pages
@@ -179,7 +179,6 @@ cdpath=(
 # Set the list of directories that Zsh searches for programs.
 path=(
   ${HOME}/.local/{,s}bin
-  ${HOME}/.asdf/{bin,shims}
   ${HOME}/{,s}bin(N)
   # /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
