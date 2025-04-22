@@ -8,7 +8,7 @@ log/
 .DS_Store
 
 # editor configs
-.vscode
+# .vscode
 .idea
 
 # zcompile cached files
