@@ -219,7 +219,7 @@ fi
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='code --wait'
+  export EDITOR='code --wait --new-window'
 fi
 
 # Compilation flags
