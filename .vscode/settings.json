@@ -1,3 +1,11 @@
 {
-  "conventionalCommits.scopes": ["zshrc", "lint", "plugins"]
+  "conventionalCommits.scopes": ["zshrc", "lint", "plugins", "plugins"],
+  "go.goroot": "/home/ecoutu/.local/share/mise/installs/go/1.22.3",
+  "go.alternateTools": {
+    "go": "/home/ecoutu/.local/share/mise/shims/go"
+  },
+  "debug.javascript.defaultRuntimeExecutable": {
+    "pwa-node": "/home/ecoutu/.local/share/mise/shims/node"
+  },
+  "python.defaultInterpreterPath": "/home/ecoutu/.local/share/mise/installs/python/3.12.4/bin/python"
 }
