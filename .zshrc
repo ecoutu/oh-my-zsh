@@ -99,7 +99,7 @@ plugins=(
   # cp
   # dircycle
   # direnv
-  # # dirhistory
+  # dirhistory
   # dirpersist
   # docker
   # docker-compose
@@ -170,19 +170,18 @@ source $ZSH/oh-my-zsh.sh
 typeset -gU cdpath fpath mailpath path
 
 # Set the the list of directories that cd searches.
-cdpath=(
-  ${cdpath[@]}
-  ${ECO_ROOT}
-  ${EMPLOYER_ROOT}
+cdpath+=(
+  ${DEV_ROOT}
+  ${ECO_SRC}
+  ${EMPLOYER_SRC}
 )
 
 # Set the list of directories that Zsh searches for programs.
-path=(
+path+=(
   ${HOME}/.local/{,s}bin
   ${HOME}/{,s}bin(N)
   # /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
-  ${path[@]}
 )
 
 
