@@ -87,7 +87,6 @@ cdpath=(
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   # adb
-  asdf
   # autojump
   # aws
   # colored-man-pages
@@ -122,10 +121,11 @@ plugins=(
   # gitignore
   # # globalias
   # golang
-  # # history
-  # # history-substring-search
+  # history
+  # history-substring-search
   # jsontools
   # jump
+  mise
   # nmap
   # node
   # npm
