@@ -172,6 +172,7 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the the list of directories that cd searches.
 cdpath+=(
+  ${HOME}
   ${DEV_ROOT}
   ${ECO_SRC}
   ${EMPLOYER_SRC}
