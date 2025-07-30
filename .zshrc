@@ -111,7 +111,7 @@ plugins=(
   # emotty
   # encode64
   # fd
-  # # fzf
+  fzf
   # gcloud
   # gem
   # git
@@ -153,6 +153,7 @@ plugins=(
   # web-search
   # urltools
   # # z
+  zoxide
   # zsh_reload
   # zsh-interactive-cd
   # zsh-navigation-tools
