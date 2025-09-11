@@ -87,76 +87,18 @@ cdpath=(
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   mise
-  # adb
-  # autojump
-  # aws
-  # colored-man-pages
-  # colorize
-  # command-not-found
-  # common-aliases
-  # copybuffer
-  # copydir
-  # copyfile
-  # cp
-  # dircycle
-  # direnv
-  # dirhistory
-  # dirpersist
-  # docker
-  # docker-compose
-  # doctl
-  # dotenv
-  # dotnet
-  # emoji
-  # emoji-clock
-  # emotty
-  # encode64
-  # fd
+  colored-man-pages
+  eza
   fzf
-  # gcloud
-  # gem
-  # git
-  # git-escape-magic
-  # git-lfs
-  # git-prompt
-  # gitignore
-  # # globalias
-  # golang
-  # history
-  # history-substring-search
-  # jsontools
-  # jump
-  # nmap
-  # node
-  # npm
-  # otp
-  # pass
-  # percol
-  # pip
-  # pipenv
-  # pj
-  # profiles
-  # python
-  # rsync
-  # ruby
-  # sudo
-  # systemadmin
-  # systemd
-  # timer
-  # tmux
-  # tmux-cssh
-  # ubuntu
-  # virtualenv
-  # vscode
-  # wakeonlan
-  # wd
-  # web-search
-  # urltools
-  # # z
+  history-substring-search
+  nmap
+  pass
+  rsync
+  timer
+  web-search
+  urltools
   zoxide
-  # zsh_reload
-  # zsh-interactive-cd
-  # zsh-navigation-tools
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
