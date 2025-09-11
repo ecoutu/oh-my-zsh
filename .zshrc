@@ -72,7 +72,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-export FZF_BASE="${HOME}/.asdf/installs/fzf/0.52.1"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 
 cdpath=(
   ${cdpath[@]}
