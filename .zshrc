@@ -86,6 +86,7 @@ cdpath=(
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  mise
   # adb
   # autojump
   # aws
@@ -125,7 +126,6 @@ plugins=(
   # history-substring-search
   # jsontools
   # jump
-  mise
   # nmap
   # node
   # npm
