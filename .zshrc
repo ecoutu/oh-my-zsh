@@ -92,6 +92,9 @@ zstyle ':omz:plugins:eza' 'size-prefix' 'binary'
 zstyle ':omz:plugins:eza' 'time-style' 'long-iso'
 # zstyle ':omz:plugins:eza' 'hyperlink' no
 
+# zoxide configuration
+export ZOXIDE_CMD_OVERRIDE="yes"
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
