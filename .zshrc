@@ -124,9 +124,6 @@ source $ZSH/oh-my-zsh.sh
 # Paths
 #
 
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
 # Set the the list of directories that cd searches.
 cdpath+=(
   ${HOME}
@@ -153,6 +150,9 @@ if [[ -d "${HOME}/.zsh" ]]; then
     fi
   done
 fi
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
 
 # autoload -U +X bashcompinit && bashcompinit
 
