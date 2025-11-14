@@ -74,12 +74,6 @@ HIST_STAMPS="yyyy-mm-dd"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 
-cdpath=(
-  ${cdpath[@]}
-  ${ECO_ROOT}
-  ${EMPLOYER_ROOT}
-)
-
 # eza configuration
 # zstyle ':omz:plugins:eza' 'dirs-first' no
 zstyle ':omz:plugins:eza' 'git-status' yes
@@ -128,7 +122,9 @@ source $ZSH/oh-my-zsh.sh
 cdpath+=(
   ${HOME}
   ${DEV_ROOT}
+  ${ECO_ROOT}
   ${ECO_SRC}
+  ${EMPLOYER_ROOT}
   ${EMPLOYER_SRC}
 )
 
@@ -140,8 +136,10 @@ path+=(
   /usr/local/{,s}bin(N)
 )
 
-
-PROJECT_PATHS=(~/ecoutu/src)
+PROJECT_PATHS=(
+  "${ECO_SRC}"
+  "${EMPLOYER_SRC}"
+)
 
 if [[ -d "${HOME}/.zsh" ]]; then
   for file in ${HOME}/.zsh/*; do
