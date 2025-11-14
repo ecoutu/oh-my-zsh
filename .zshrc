@@ -87,7 +87,7 @@ zstyle ':omz:plugins:eza' 'time-style' 'long-iso'
 # zstyle ':omz:plugins:eza' 'hyperlink' no
 
 # zoxide configuration
-export ZOXIDE_CMD_OVERRIDE="yes"
+export ZOXIDE_CMD_OVERRIDE="cd"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
