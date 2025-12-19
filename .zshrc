@@ -1,8 +1,15 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
 if [[ -f ~/.eco_env_common.zsh ]]; then
   source ~/.eco_env_common.zsh
@@ -12,12 +19,11 @@ if [[ -f ~/.eco_env.zsh ]]; then
   source ~/.eco_env.zsh
 fi
 
-
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="afowler"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -26,34 +32,36 @@ ZSH_THEME="afowler"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
- CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="false"
+# HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=1
+# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-DISABLE_MAGIC_FUNCTIONS="false"
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+DISABLE_LS_COLORS="false"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="false"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -71,6 +79,46 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Pre-load user configuration
+
+#
+# Paths
+#
+
+# Set the the list of directories that cd searches.
+cdpath+=(
+  ${HOME}
+  ${DEV_ROOT}
+  ${ECO_ROOT}
+  ${ECO_SRC}
+  ${EMPLOYER_ROOT}
+  ${EMPLOYER_SRC}
+)
+
+# Set the list of directories that Zsh searches for programs.
+path+=(
+  ${HOME}/.local/{,s}bin
+  ${HOME}/{,s}bin(N)
+  # /opt/{homebrew,local}/{,s}bin(N)
+  /usr/local/{,s}bin(N)
+)
+
+PROJECT_PATHS=(
+  "${ECO_SRC}"
+  "${EMPLOYER_SRC}"
+)
+
+if [[ -d "${HOME}/.zsh" ]]; then
+  for file in ${HOME}/.zsh/*; do
+    if [[ ! -d "${file}" ]]; then
+      source "${file}"
+    fi
+  done
+fi
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 
@@ -114,58 +162,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-#
-# Paths
-#
-
-# Set the the list of directories that cd searches.
-cdpath+=(
-  ${HOME}
-  ${DEV_ROOT}
-  ${ECO_ROOT}
-  ${ECO_SRC}
-  ${EMPLOYER_ROOT}
-  ${EMPLOYER_SRC}
-)
-
-# Set the list of directories that Zsh searches for programs.
-path+=(
-  ${HOME}/.local/{,s}bin
-  ${HOME}/{,s}bin(N)
-  # /opt/{homebrew,local}/{,s}bin(N)
-  /usr/local/{,s}bin(N)
-)
-
-PROJECT_PATHS=(
-  "${ECO_SRC}"
-  "${EMPLOYER_SRC}"
-)
-
-if [[ -d "${HOME}/.zsh" ]]; then
-  for file in ${HOME}/.zsh/*; do
-    if [[ ! -d "${file}" ]]; then
-      source "${file}"
-    fi
-  done
-fi
-
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
-# autoload -U +X bashcompinit && bashcompinit
-
-# ### ZNT's installer added snippet ###
-# fpath=("$fpath[@]" "$HOME/.config/znt/zsh-navigation-tools")
-# autoload n-aliases n-cd n-env n-functions n-history n-kill n-list n-list-draw n-list-input n-options n-panelize n-help
-# autoload znt-usetty-wrapper znt-history-widget znt-cd-widget znt-kill-widget
-# alias naliases=n-aliases ncd=n-cd nenv=n-env nfunctions=n-functions nhistory=n-history
-# alias nkill=n-kill noptions=n-options npanelize=n-panelize nhelp=n-help
-# zle -N znt-history-widget
-# bindkey '^R' znt-history-widget
-# setopt AUTO_PUSHD HIST_IGNORE_DUPS PUSHD_IGNORE_DUPS
-# zstyle ':completion::complete:n-kill::bits' matcher 'r:|=** l:|=*'
-# ### END ###
-
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -179,13 +175,19 @@ else
 fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
