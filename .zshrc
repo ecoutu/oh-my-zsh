@@ -109,6 +109,12 @@ PROJECT_PATHS=(
   "${EMPLOYER_SRC}"
 )
 
+fpath+=(
+  ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+  "${HOME}/.zsh/completions"
+  "${HOME}/.local/share/mise/installs/zoxide/latest/completions"
+)
+
 if [[ -d "${HOME}/.zsh" ]]; then
   for file in ${HOME}/.zsh/*; do
     if [[ ! -d "${file}" ]]; then
