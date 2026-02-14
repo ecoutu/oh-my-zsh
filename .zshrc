@@ -11,14 +11,6 @@ fi
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-if [[ -f ~/.eco_env_common.zsh ]]; then
-  source ~/.eco_env_common.zsh
-fi
-
-if [[ -f ~/.eco_env.zsh ]]; then
-  source ~/.eco_env.zsh
-fi
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -86,43 +78,6 @@ HIST_STAMPS="yyyy-mm-dd"
 # Paths
 #
 
-# Set the the list of directories that cd searches.
-cdpath+=(
-  ${HOME}
-  ${DEV_ROOT}
-  ${ECO_ROOT}
-  ${ECO_SRC}
-  ${EMPLOYER_ROOT}
-  ${EMPLOYER_SRC}
-)
-
-# Set the list of directories that Zsh searches for programs.
-path+=(
-  ${HOME}/.local/{,s}bin
-  ${HOME}/{,s}bin(N)
-  # /opt/{homebrew,local}/{,s}bin(N)
-  /usr/local/{,s}bin(N)
-)
-
-PROJECT_PATHS=(
-  "${ECO_SRC}"
-  "${EMPLOYER_SRC}"
-)
-
-fpath+=(
-  ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-  "${HOME}/.zsh/completions"
-  "${HOME}/.local/share/mise/installs/zoxide/latest/completions"
-)
-
-if [[ -d "${HOME}/.zsh" ]]; then
-  for file in ${HOME}/.zsh/*; do
-    if [[ ! -d "${file}" ]]; then
-      source "${file}"
-    fi
-  done
-fi
-
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 
@@ -150,6 +105,7 @@ export ZOXIDE_CMD_OVERRIDE="cd"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   mise
+  eco
   aws
   colored-man-pages
   eza
