@@ -155,7 +155,10 @@ plugins=(
   web-search
   urltools
   zoxide
+  zsh-autocomplete
   zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-claudecode-completion
 )
 
 source $ZSH/oh-my-zsh.sh
