@@ -150,11 +150,14 @@ export ZOXIDE_CMD_OVERRIDE="cd"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   mise
+  aws
   colored-man-pages
   eza
   fzf
+  gcloud
   history-substring-search
   nmap
+  opentofu
   pass
   rsync
   timer
