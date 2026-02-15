@@ -74,29 +74,7 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Pre-load user configuration
 
-#
-# Paths
-#
-
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
-
-# eza configuration
-# zstyle ':omz:plugins:eza' 'dirs-first' no
-zstyle ':omz:plugins:eza' 'git-status' yes
-zstyle ':omz:plugins:eza' 'header' yes
-# zstyle ':omz:plugins:eza' 'show-group' yes
-zstyle ':omz:plugins:eza' 'icons' yes
-zstyle ':omz:plugins:eza' 'color-scale' all
-zstyle ':omz:plugins:eza' 'color-scale-mode' gradient
-zstyle ':omz:plugins:eza' 'size-prefix' 'binary'
-zstyle ':omz:plugins:eza' 'time-style' 'long-iso'
-# zstyle ':omz:plugins:eza' 'hyperlink' no
-
-# zoxide configuration
-export ZOXIDE_CMD_OVERRIDE="cd"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -104,10 +82,12 @@ export ZOXIDE_CMD_OVERRIDE="cd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  mise-hotfix
   mise
   eco
   aws
   colored-man-pages
+  eza-config
   eza
   fzf
   gcloud
@@ -119,6 +99,7 @@ plugins=(
   timer
   web-search
   urltools
+  zoxide-config
   zoxide
   zsh-autocomplete
   zsh-autosuggestions
@@ -127,6 +108,9 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
 
 # User configuration
 
