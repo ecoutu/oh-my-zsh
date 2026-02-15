@@ -12,7 +12,6 @@ cdpath+=(
 path+=(
   ${HOME}/.local/{,s}bin
   ${HOME}/{,s}bin(N)
-
   /usr/local/{,s}bin(N)
 )
 
