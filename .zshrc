@@ -95,6 +95,7 @@ plugins=(
   nmap
   opentofu
   pass
+  ripgrep-config
   rsync
   timer
   web-search
