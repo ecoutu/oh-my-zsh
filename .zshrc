@@ -85,7 +85,10 @@ plugins=(
   mise-hotfix
   mise
   eco
+  1password
+  1password-env
   aws
+  brew
   colored-man-pages
   eza-config
   eza
@@ -144,3 +147,15 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Added by Antigravity
+export PATH="/Users/ecoutu/.antigravity/antigravity/bin:$PATH"
+
+# bun completions
+[ -s "/Users/ecoutu/.bun/_bun" ] && source "/Users/ecoutu/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+alias claude-mem='/Users/ecoutu/.bun/bin/bun "/Users/ecoutu/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
