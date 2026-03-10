@@ -92,6 +92,7 @@ plugins=(
   colored-man-pages
   eza-config
   eza
+  fd
   fzf
   gcloud
   history-substring-search
