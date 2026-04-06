@@ -88,7 +88,6 @@ plugins=(
   1password
   1password-env
   aws
-  brew
   colored-man-pages
   eza-config
   eza
@@ -111,6 +110,14 @@ plugins=(
   zsh-syntax-highlighting
   zsh-claudecode-completion
 )
+
+if [[ "$OSTYPE" == darwin* ]]; then
+  plugins+=(
+    brew
+    iterm2
+    macos
+  )
+fi
 
 source $ZSH/oh-my-zsh.sh
 
