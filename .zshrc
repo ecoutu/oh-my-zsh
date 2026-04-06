@@ -89,6 +89,7 @@ plugins=(
   1password-env
   aws
   bun
+  claude-mem
   deno
   colored-man-pages
   eza-config
@@ -157,5 +158,3 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-alias claude-mem='/Users/ecoutu/.bun/bin/bun "/Users/ecoutu/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
