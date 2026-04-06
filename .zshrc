@@ -88,6 +88,8 @@ plugins=(
   1password
   1password-env
   aws
+  bun
+  deno
   colored-man-pages
   eza-config
   eza
