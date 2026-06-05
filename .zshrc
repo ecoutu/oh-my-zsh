@@ -90,6 +90,7 @@ plugins=(
   aws
   bun
   claude-mem
+  codex
   deno
   colored-man-pages
   eza-config
