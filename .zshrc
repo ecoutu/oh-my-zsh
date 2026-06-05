@@ -101,6 +101,7 @@ plugins=(
   nmap
   opentofu
   pass
+  rclone
   ripgrep-config
   rsync
   timer
