@@ -105,6 +105,7 @@ plugins=(
   fd
   fzf
   gcloud
+  gpg-agent
   history-substring-search
   nmap
   opentofu
