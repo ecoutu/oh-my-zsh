@@ -1,0 +1,7 @@
+export EMPLOYER_ROOT="${HOME}/${EMPLOYER}"
+export EMPLOYER_SRC="${EMPLOYER_ROOT}/src"
+
+if (( ${+EMPLOYER_OP_ENV_ENTRY} )); then
+  OP_ENV_ENTRIES+=("${EMPLOYER_OP_ENV_ENTRY}")
+fi
+
