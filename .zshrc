@@ -82,9 +82,11 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  secret-dotfiles
   mise-hotfix
   mise
-  eco
+  ecoutu
+  employer
   1password
   1password-env
   aws
