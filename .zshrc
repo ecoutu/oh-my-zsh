@@ -109,6 +109,7 @@ plugins=(
   nmap
   opentofu
   pass
+  pnpm
   rclone
   ripgrep-config
   rsync
