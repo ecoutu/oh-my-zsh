@@ -1,87 +1,98 @@
-# 1password-env: Resolve 1Password secrets into ~/.env and source it
+# 1password-env: Resolve 1Password secrets from template files and source them
 #
-# Template: ~/.env.op (standard .env format with op:// references as values)
-# Output:   ~/.env (resolved secrets, generated once, sourced on every shell)
+# Each entry is "account|template|output":
+#   account  - the 1Password account passed to `op inject --account`
+#   template - a file with op:// references (standard .env format works:
+#              KEY=op://Vault/Item/field). `op inject` substitutes only the
+#              op:// tokens, leaving KEY= intact, so the output stays sourceable.
+#   output   - the resolved env file (generated, sourced on every shell)
 #
-# Example ~/.env.op:
+# Example template (~/.env.vn.tpl):
 #   GITHUB_TOKEN=op://Private/GitHub PAT/credential
-#   NPM_TOKEN="op://Development/npm/token"
+#   NPM_TOKEN=op://Development/npm/token
 
 # Bail silently if op is not installed
 (( ${+commands[op]} )) || return
 
-typeset -g _OP_ENV_TEMPLATE="${HOME}/.env.op"
-typeset -g _OP_ENV_FILE="${HOME}/.env"
+# account|template|output  (override in ~/.zshrc before this plugin loads)
+typeset -ga OP_ENV_ENTRIES
 
+# _op_env_generate <account> <template> <output>
 function _op_env_generate() {
-  if [[ ! -f "$_OP_ENV_TEMPLATE" ]]; then
-    echo "[1password-env] Template not found: $_OP_ENV_TEMPLATE" >&2
+  local account="$1" template="$2" output="$3"
+
+  if [[ ! -f "$template" ]]; then
+    echo "[1password-env] Template not found: $template" >&2
     return 1
   fi
 
-  local lines=()
-  local line key ref value
+  if ! op inject --account "$account" -i "$template" -o "$output" --force 2>/dev/null; then
+    echo "[1password-env] Failed to inject ${template} (account ${account})" >&2
+    return 1
+  fi
 
+  chmod 600 "$output"
+}
+
+# _op_env_source <output>
+function _op_env_source() {
+  local output="$1"
+  [[ -f "$output" ]] || return 1
+
+  local line key value
   while IFS= read -r line; do
     [[ -z "$line" || "$line" == \#* ]] && continue
 
     key="${line%%=*}"
-    ref="${line#*=}"
+    value="${line#*=}"
 
-    # Strip surrounding quotes from reference
-    ref="${ref#\"}"
-    ref="${ref%\"}"
-    ref="${ref#\'}"
-    ref="${ref%\'}"
+    # Strip a single layer of surrounding quotes the template may have added
+    value="${value#\"}"; value="${value%\"}"
+    value="${value#\'}"; value="${value%\'}"
 
-    value="$(op read "$ref" 2>/dev/null)"
-    if (( $? != 0 )); then
-      echo "[1password-env] Failed to read ${key} from ${ref}" >&2
-      continue
-    fi
-
-    # Single-quote value, escaping any embedded single quotes
-    lines+=("${key}='${value//\'/\'\\\'\'}'")
-  done < "$_OP_ENV_TEMPLATE"
-
-  printf '%s\n' "${lines[@]}" > "$_OP_ENV_FILE"
-  chmod 600 "$_OP_ENV_FILE"
-}
-
-function _op_env_source() {
-  [[ -f "$_OP_ENV_FILE" ]] || return 1
-
-  local line
-  while IFS= read -r line; do
-    [[ -z "$line" || "$line" == \#* ]] && continue
-    export "$line"
-  done < "$_OP_ENV_FILE"
+    export "$key=$value"
+  done < "$output"
 }
 
 function op-env-reload() {
   echo "[1password-env] Regenerating secrets..."
-  command rm -f "$_OP_ENV_FILE"
-  _op_env_generate && _op_env_source
+  local entry account template output
+  for entry in "${OP_ENV_ENTRIES[@]}"; do
+    local parts=("${(@s:|:)entry}")
+    account="${parts[1]}" template="${parts[2]}" output="${parts[3]}"
+    command rm -f "$output"
+    _op_env_generate "$account" "$template" "$output" && _op_env_source "$output"
+  done
   echo "[1password-env] Done."
 }
 
 function op-env-list() {
-  if [[ ! -f "$_OP_ENV_FILE" ]]; then
-    echo "[1password-env] No generated env file found."
-    return
-  fi
-
-  echo "[1password-env] Managed environment variables:"
-  local line
-  while IFS= read -r line; do
-    [[ -z "$line" || "$line" == \#* ]] && continue
-    echo "  ${line%%=*}"
-  done < "$_OP_ENV_FILE"
+  local entry output line found=0
+  for entry in "${OP_ENV_ENTRIES[@]}"; do
+    local parts=("${(@s:|:)entry}")
+    output="${parts[3]}"
+    [[ -f "$output" ]] || continue
+    found=1
+    echo "[1password-env] ${output}:"
+    while IFS= read -r line; do
+      [[ -z "$line" || "$line" == \#* ]] && continue
+      echo "  ${line%%=*}"
+    done < "$output"
+  done
+  (( found )) || echo "[1password-env] No generated env files found."
 }
 
-# Plugin init: generate if missing or template changed, then source
-if [[ -f "$_OP_ENV_TEMPLATE" ]] && [[ ! -f "$_OP_ENV_FILE" || "$_OP_ENV_TEMPLATE" -nt "$_OP_ENV_FILE" ]]; then
-  _op_env_generate
-elif [[ -f "$_OP_ENV_FILE" ]]; then
-  _op_env_source
-fi
+# Plugin init: per entry, (re)generate if missing or template changed, then source
+() {
+  local entry account template output
+  for entry in "${OP_ENV_ENTRIES[@]}"; do
+    local parts=("${(@s:|:)entry}")
+    account="${parts[1]}" template="${parts[2]}" output="${parts[3]}"
+
+    if [[ -f "$template" ]] && [[ ! -f "$output" || "$template" -nt "$output" ]]; then
+      _op_env_generate "$account" "$template" "$output" && _op_env_source "$output"
+    elif [[ -f "$output" ]]; then
+      _op_env_source "$output"
+    fi
+  done
+}
