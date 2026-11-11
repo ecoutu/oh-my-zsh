@@ -99,6 +99,7 @@ plugins=(
   claude
   codex
   deno
+  claude-term-tabs
   colored-man-pages
   eza-config
   eza

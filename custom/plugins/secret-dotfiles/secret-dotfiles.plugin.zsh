@@ -5,3 +5,5 @@ if [[ -d "${HOME}/.zsh" ]]; then
     fi
   done
 fi
+
+alias ctt="claude-term-tabs"
