@@ -16,3 +16,7 @@ log/
 # zcompile cached files
 *.zwc
 *.zwc.old
+
+# local tool output
+firebase-debug.log
+.serena/
