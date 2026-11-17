@@ -96,6 +96,7 @@ plugins=(
   1password-env
   aws
   bun
+  claude
   claude-mem
   codex
   deno
@@ -105,6 +106,7 @@ plugins=(
   fd
   fzf
   gcloud
+  gcloud-auth
   gpg-agent
   history-substring-search
   nmap
@@ -128,6 +130,7 @@ plugins=(
 if [[ "$OSTYPE" == darwin* ]]; then
   plugins+=(
     brew
+    iterm2-config
     iterm2
     macos
   )
@@ -169,3 +172,12 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Cortex CLI completion (disable via /settings in cortex)
+[[ -s ~/.zsh/completions/cortex.zsh ]] && source ~/.zsh/completions/cortex.zsh
+
+
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/ecoutu/.local/bin:$PATH"
