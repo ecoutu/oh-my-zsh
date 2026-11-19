@@ -17,9 +17,11 @@ claude-mcp-status() {
 typeset -ga claude_prelaunch_functions
 
 claude() {
-  local fn
-  for fn in $claude_prelaunch_functions; do
-    (( $+functions[$fn] )) && $fn
-  done
-  command claude "$@"
+  (
+    local fn
+    for fn in $claude_prelaunch_functions; do
+      (( $+functions[$fn] )) && $fn
+    done
+    command claude "$@"
+  )
 }
