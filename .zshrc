@@ -97,7 +97,6 @@ plugins=(
   aws
   bun
   claude
-  claude-mem
   codex
   deno
   colored-man-pages
