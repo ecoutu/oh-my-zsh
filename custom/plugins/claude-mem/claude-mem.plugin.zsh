@@ -1,1 +1,0 @@
-alias claude-mem='bun "/Users/ecoutu/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
