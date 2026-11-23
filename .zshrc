@@ -123,7 +123,7 @@ plugins=(
   urltools
   zoxide-config
   zoxide
-  zsh-autocomplete
+  # zsh-autocomplete
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-claudecode-completion
