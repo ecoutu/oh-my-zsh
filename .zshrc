@@ -108,6 +108,8 @@ plugins=(
   gcloud
   gcloud-auth
   gpg-agent
+  gh
+  git
   history-substring-search
   nmap
   opentofu
