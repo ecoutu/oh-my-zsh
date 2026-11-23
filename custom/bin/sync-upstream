@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Rebase this fork's master onto ohmyzsh/ohmyzsh, bump the submodules, and
+# force-push to origin with a lease, so a push from another machine is never
+# overwritten.
+#
+# Usage: custom/bin/sync-upstream [--no-push]
+#   or:  git sync-upstream [--no-push]   (alias set up on the first run)
+
+set -euo pipefail
+
+push=1
+case "${1:-}" in
+  --no-push) push=0 ;;
+  "") ;;
+  *) echo "usage: ${0##*/} [--no-push]" >&2; exit 2 ;;
+esac
+
+cd "$(git rev-parse --show-toplevel)"
+
+die() { echo "sync-upstream: $*" >&2; exit 1; }
+
+git config pull.rebase true
+git config alias.sync-upstream '!custom/bin/sync-upstream'
+
+[[ "$(git branch --show-current)" == master ]] || die "check out master first"
+[[ -z "$(git status --porcelain)" ]] || die "working tree isn't clean"
+
+git fetch --quiet upstream
+git fetch --quiet origin
+
+origin_tip=$(git rev-parse origin/master)
+start=$(git rev-parse HEAD)
+
+# After a rewrite on another machine, local master is still on the old history.
+git merge-base --is-ancestor origin/master HEAD ||
+  die "origin/master has commits this branch lacks; run 'git rebase origin/master' first"
+
+trap 'echo "sync-upstream: failed; to undo: git rebase --abort 2>/dev/null; git reset --hard ${start:0:12}" >&2' ERR
+
+echo "==> rebasing onto upstream/master"
+git rebase --quiet upstream/master
+git submodule update --quiet --init
+
+echo "==> updating submodules"
+git submodule update --quiet --init --remote
+if [[ -n "$(git status --porcelain)" ]]; then
+  git diff --submodule=log | grep '^Submodule' | sed 's/^/    /'
+  git commit --quiet --all -m "chore(submodules): update submodules"
+fi
+
+echo "==> checking"
+unsigned=$(git log --format='%h %G?' upstream/master..HEAD | awk '$2 != "G"')
+[[ -z "$unsigned" ]] || die "commits without a good signature:"$'\n'"$unsigned"
+zsh -n .zshrc || die ".zshrc has a syntax error"
+
+trap - ERR
+git log --oneline "$origin_tip..HEAD" | tail -n 5
+
+if (( push )); then
+  echo "==> pushing"
+  git push --quiet --force-with-lease="master:$origin_tip" origin master
+  echo "origin/master: ${origin_tip:0:8} -> $(git rev-parse --short=8 HEAD)"
+else
+  echo "not pushed (--no-push); to push: git push --force-with-lease=master:$origin_tip origin master"
+fi
