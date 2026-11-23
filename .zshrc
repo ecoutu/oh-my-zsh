@@ -110,7 +110,6 @@ plugins=(
   gpg-agent
   gh
   git
-  history-substring-search
   nmap
   opentofu
   pass
@@ -123,10 +122,11 @@ plugins=(
   urltools
   zoxide-config
   zoxide
+  zsh-claudecode-completion
+  zsh-syntax-highlighting
   # zsh-autocomplete
   zsh-autosuggestions
-  zsh-syntax-highlighting
-  zsh-claudecode-completion
+  history-substring-search
 )
 
 if [[ "$OSTYPE" == darwin* ]]; then
