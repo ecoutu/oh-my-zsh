@@ -91,13 +91,11 @@ plugins=(
   mise-hotfix
   mise
   ecoutu
-  employer
   1password
   1password-env
   aws
   bun
   claude
-  codex
   deno
   claude-term-tabs
   colored-man-pages
@@ -111,7 +109,6 @@ plugins=(
   gh
   git
   nmap
-  opentofu
   pass
   pnpm
   rclone
@@ -128,6 +125,14 @@ plugins=(
   zsh-autosuggestions
   history-substring-search
 )
+
+if [[ -n "$EMPLOYER" ]]; then
+  plugins+=(
+    codex
+    employer
+    opentofu
+  )
+fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
   plugins+=(
